@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String
+  password String
+
+  created_at     DateTime?        @default(now())
+  updated_at     DateTime?        @default(now())
+  goal           Goal[]
+  goalCompletion GoalCompletion[]
+
+  @@map("users")
+}
+
+model Goal {
+  id                       String   @id @default(uuid())
+  title                    String
+  desired_weekly_frequency Int
+  created_at               DateTime @default(now())
+
+  user           User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id        String
+  GoalCompletion GoalCompletion[]
+
+  @@map("goals")
+}
+
+model GoalCompletion {
+  id      String @id @default(uuid())
+  goal_id String
+  user_id String
+
+  created_at DateTime?
+
+  goal Goal @relation(fields: [goal_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("goalCompletions")
+}
