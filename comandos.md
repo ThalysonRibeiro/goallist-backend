@@ -7,6 +7,8 @@ npm install prisma
 npm install @prisma/client
 npx prisma init
 yarn prisma migrate dev
+npx prisma studio
+
 
 npm install bcryptjs
 npm i --save-dev @types/bcryptjs
