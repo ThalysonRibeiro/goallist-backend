@@ -25,7 +25,7 @@ class AuthUserController {
       password,
     });
 
-    return res.status(200).send({ message: "session started success", session });
+    return res.status(200).send(session);
 
   }
 }
