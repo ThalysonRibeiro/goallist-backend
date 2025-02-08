@@ -19,7 +19,7 @@ class AuthUserService {
 
     //se não tiver um usuario com esse email
     if (!user) {
-      throw new Error("Email/password concerrect");
+      throw new Error("E-mail ou senha incorretos");
     }
 
     //desincripta a senha 
@@ -27,7 +27,7 @@ class AuthUserService {
 
     //se o usuario não tiver essa senha
     if (!passwordMath) {
-      throw new Error("Email/password concerrect");
+      throw new Error("E-mail ou senha incorretos");
     }
 
     const token = sign(
