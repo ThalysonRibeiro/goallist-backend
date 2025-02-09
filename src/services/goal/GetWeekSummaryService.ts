@@ -74,13 +74,11 @@ class GetWeekSummaryService {
     );
 
     return {
-      summary: [
-        {
-          completed: completedCount,
-          total: totalDesiredFrequency,
-          goalsPerDay: goalsCompletedByWeekDay,
-        },
-      ],
+      summary: {
+        completed: completedCount,
+        total: totalDesiredFrequency,
+        goalsPerDay: goalsCompletedByWeekDay,
+      },
     };
   }
 }

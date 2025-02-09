@@ -15,7 +15,7 @@ CREATE TABLE "goals" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "desired_weekly_frequency" INTEGER NOT NULL,
-    "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "user_id" TEXT NOT NULL,
 
     CONSTRAINT "goals_pkey" PRIMARY KEY ("id")
