@@ -3,10 +3,20 @@ import { GetWeekSummaryService } from '../../services/goal/GetWeekSummaryService
 
 class GetWeekSummaryController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const getWeekSummaryService = new GetWeekSummaryService();
-    const result = await getWeekSummaryService.execute();
+    try {
+      const user_id = request.user?.id;
 
-    reply.send(result);
+      if (!user_id) {
+        return reply.status(401).send({ error: 'Usuário não autorizado' });
+      }
+
+      const getWeekSummaryService = new GetWeekSummaryService();
+      const result = await getWeekSummaryService.execute(user_id);
+
+      return reply.send(result);
+    } catch (error) {
+      return reply.status(500).send({ error: 'Erro interno do servidor' });
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import { appRoutes } from "../routes/routes";
 import fastifyCors from "@fastify/cors";
 
 const app = Fastify({
-  logger: true,
+  // logger: true,
 });
 
 app.register(fastifyCors, {

@@ -1,13 +1,18 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { GetWeekPendingGoalsServer } from '../../services/goal/GetWeekPendingGoalsServer'
 
-
 class GetWeekPendingGoalsController {
   async handle(req: FastifyRequest, res: FastifyReply) {
     try {
-      const getPendingGoalsServer = new GetWeekPendingGoalsServer()
+      // Obtém o user_id do request que foi configurado pelo middleware
+      const user_id = req.user?.id
 
-      const goals = await getPendingGoalsServer.execute()
+      if (!user_id) {
+        return res.status(401).send({ error: 'Usuário não autorizado' })
+      }
+
+      const getPendingGoalsServer = new GetWeekPendingGoalsServer()
+      const goals = await getPendingGoalsServer.execute(user_id)
 
       return res.send(goals)
     } catch (error) {
