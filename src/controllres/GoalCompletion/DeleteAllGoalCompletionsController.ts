@@ -12,9 +12,13 @@ class DeleteAllGoalCompletionsController {
 
     const deleteAllGoalCompletionsService = new DeleteAllGoalCompletionsService();
 
-    await deleteAllGoalCompletionsService.execute();
+    try {
+      await deleteAllGoalCompletionsService.execute();
 
-    return res.status(200).send({ message: "All goal completions deleted successfully" });
+      return res.status(200).send({ message: "All goal completions deleted successfully" });
+    } catch (error) {
+      return res.status(400).send({ message: "error delete" });
+    }
 
   }
 }

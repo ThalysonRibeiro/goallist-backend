@@ -17,12 +17,12 @@ class ChangePasswordService {
 
     //se a senha atual estiver incorreta
     if (!passwordMatch) {
-      throw new Error('Current password incorrect');
+      throw new Error('Senha atual incorreta');
     }
 
     // Verifica se a nova senha é igual à atual
     if (newPassword === currentPassword) {
-      throw new Error('the new password cannot be the same as the old one');
+      throw new Error('A nova senha não pode ser igual a antiga');
     }
     // Criptografa a nova senha
     const hashedPassword = await hash(newPassword, 8);

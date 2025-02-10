@@ -16,6 +16,7 @@ class GoalUndoController {
       await goalUndoService.execute(id)
     } catch (error) {
       console.log(error);
+      return res.status(400).send({ message: "error undo" });
     }
   }
 }

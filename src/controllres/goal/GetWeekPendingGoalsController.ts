@@ -16,7 +16,7 @@ class GetWeekPendingGoalsController {
 
       return res.send(goals)
     } catch (error) {
-      return res.status(500).send({ error: 'Erro interno do servidor' })
+      return res.status(400).send({ error: 'Erro interno do servidor' })
     }
   }
 }

@@ -7,26 +7,26 @@ async function seed() {
       id: "4f742324-9ef8-49ba-bf77-75309b311a02",
       name: "Katarina",
       email: "kat.p@gmail.com",
-      password: "$2a$08$JNIbm0QEyqVK.wqlseBTRem6BHzch0xccmC9v.lVmhxn2Y1miprtK",
+      password: "$2a$08$oF.o3e0dGi.LWUMDA.vBt.5mHVSMrVou4kH4wahM9t0jt3moTePvS",
       goal: {
         create: [
           {
             title: "Exercitar 3 vezes por semana",
             desired_weekly_frequency: 3,
-            created_at: new Date('2025-02-05T10:00:00Z'), // Segunda-feira dessa semana
+            created_at: new Date('2025-02-06 04:55:53.633'), // Segunda-feira dessa semana
             GoalCompletion: {
               create: [
                 {
                   user_id: "4f742324-9ef8-49ba-bf77-75309b311a02",
-                  created_at: new Date('2025-02-05T15:30:00Z'), // Segunda-feira
+                  created_at: new Date('2025-02-09 21:31:10.49'), // Segunda-feira
                 },
                 {
                   user_id: "4f742324-9ef8-49ba-bf77-75309b311a02",
-                  created_at: new Date('2025-02-06T14:20:00Z'), // Terça-feira
+                  created_at: new Date('2025-02-07 21:31:10.49'), // Terça-feira
                 },
                 {
                   user_id: "4f742324-9ef8-49ba-bf77-75309b311a02",
-                  created_at: new Date('2025-02-07T16:45:00Z'), // Quarta-feira
+                  created_at: new Date('2025-02-10 21:31:10.49'), // Quarta-feira
                 },
                 {
                   user_id: "4f742324-9ef8-49ba-bf77-75309b311a02",
@@ -42,7 +42,7 @@ async function seed() {
               create: [
                 {
                   user_id: "4f742324-9ef8-49ba-bf77-75309b311a02",
-                  created_at: new Date('2025-02-05T20:00:00Z'), // Segunda-feira
+                  created_at: new Date('2025-02-05 21:31:10.49'), // Segunda-feira
                 }
               ]
             },

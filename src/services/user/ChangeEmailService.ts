@@ -14,12 +14,12 @@ class ChangeEmailService {
 
     // Verifica se o e-mail atual está correto
     if (user.email !== currentEmail) {
-      throw new Error('Current email incorrect');
+      throw new Error('E-mail atual incorreto');
     }
 
     // Verifica se o novo e-mail é igual ao e-mail atual
     if (newEmail === currentEmail) {
-      throw new Error('the new email cannot be the same as the old one');
+      throw new Error('o novo e-mail não pode ser igual ao antigo');
     }
 
     // Verifica se o novo e-mail já está em uso
@@ -28,7 +28,7 @@ class ChangeEmailService {
     });
 
     if (emailAlreadyExists) {
-      throw new Error('The new email is already in use by another user');
+      throw new Error('O novo e-mail já está em uso por outro usuário');
     }
 
     // Atualiza o e-mail do usuário

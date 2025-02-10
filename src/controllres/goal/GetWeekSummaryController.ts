@@ -15,7 +15,7 @@ class GetWeekSummaryController {
 
       return reply.send(result);
     } catch (error) {
-      return reply.status(500).send({ error: 'Erro interno do servidor' });
+      return reply.status(400).send({ error: 'Erro interno do servidor' });
     }
   }
 }

@@ -4,18 +4,11 @@ import { startOfWeek, endOfWeek, format } from 'date-fns';
 const prisma = new PrismaClient();
 
 class GetWeekSummaryService {
-  async execute(user_id: string) { // Adicione o parâmetro user_id
-    const currentDate = new Date();
-    const firstDayOfWeek = startOfWeek(currentDate, { weekStartsOn: 1 });
-    const lastDayOfWeek = endOfWeek(currentDate, { weekStartsOn: 1 });
-
-    // Adicione o filtro user_id na consulta de goals
-    const goalsCreatedUpToWeek = await prisma.goal.findMany({
+  async execute(user_id: string) {
+    // Busca todos os goals do usuário
+    const allGoals = await prisma.goal.findMany({
       where: {
-        user_id: user_id, // Adicione este filtro
-        created_at: {
-          lte: lastDayOfWeek,
-        },
+        user_id: user_id,
       },
       select: {
         id: true,
@@ -25,14 +18,10 @@ class GetWeekSummaryService {
       },
     });
 
-    // Adicione o filtro user_id na consulta de goalCompletions
-    const goalsCompletedInWeek = await prisma.goalCompletion.findMany({
+    // Busca todas as completions do usuário
+    const allCompletions = await prisma.goalCompletion.findMany({
       where: {
-        user_id: user_id, // Adicione este filtro
-        created_at: {
-          gte: firstDayOfWeek,
-          lte: lastDayOfWeek,
-        },
+        user_id: user_id,
       },
       include: {
         goal: {
@@ -48,10 +37,11 @@ class GetWeekSummaryService {
       },
     });
 
-    // O resto do código permanece igual
     const goalsCompletedByWeekDay: Record<string, any[]> = {};
+    let totalCompleted = 0;
 
-    goalsCompletedInWeek.forEach((completion) => {
+    // Agrupa todas as completions por dia
+    allCompletions.forEach((completion) => {
       const completedAtDate = completion.created_at ? format(completion.created_at, 'yyyy-MM-dd') : null;
 
       if (completedAtDate) {
@@ -62,23 +52,20 @@ class GetWeekSummaryService {
           id: completion.id,
           title: completion.goal.title,
           completedAt: completion.created_at,
-
-          // id: completion.goal.id,
-          // title: completion.goal.title,
-          // completedAt: completion.created_at,
         });
+        totalCompleted++;
       }
     });
 
-    const completedCount = goalsCompletedInWeek.length;
-    const totalDesiredFrequency = goalsCreatedUpToWeek.reduce(
+    // Calcula o total de frequência desejada somando todos os goals
+    const totalDesiredFrequency = allGoals.reduce(
       (sum, goal) => sum + goal.desired_weekly_frequency,
       0
     );
 
     return {
       summary: {
-        completed: completedCount,
+        completed: totalCompleted,
         total: totalDesiredFrequency,
         goalsPerDay: goalsCompletedByWeekDay,
       },

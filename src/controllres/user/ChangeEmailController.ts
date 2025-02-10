@@ -15,21 +15,16 @@ class ChangeEmailController {
     try {
       await changeEmailService.execute({ user_id, currentEmail, newEmail });
       return res.status(200).send({ message: 'Email updated successfully' });
-    } catch (error: unknown) {
-      // Afirmação de tipo para garantir que o erro seja uma instância de Error
-      if (error instanceof Error) {
-        if (error.message === 'Current email incorrect') {
-          return res.status(400).send({ statusCode: 400, error: 'Bad Request', message: error.message });
-        } else if (error.message === 'User not found') {
-          return res.status(404).send({ statusCode: 404, error: 'Not Found', message: error.message });
-        } else if (error.message === 'Email already in use') {
-          return res.status(409).send({ statusCode: 409, error: 'Conflict', message: error.message });
-        }
+    } catch (error: any) {
+      if (error.message === 'E-mail atual incorreto') {
+        return res.status(400).send({ message: error.message });
+      } else if (error.message === 'O novo e-mail não pode ser igual ao antigo') {
+        return res.status(400).send({ message: error.message });
+      } else if (error.message === 'O novo e-mail já está em uso por outro usuário') {
+        return res.status(409).send({ message: error.message });
       }
 
-      // Registre o erro para depuração
-      console.error('Unexpected error:', error);
-      return res.status(500).send({ statusCode: 500, error: 'Internal Server Error', message: 'An unexpected error occurred' });
+      return res.status(400).send(error)
     }
   }
 }

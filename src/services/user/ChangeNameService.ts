@@ -32,7 +32,7 @@ class ChangeNameService {
         }
       });
 
-      return userAlreadyExiste;
+      return userUpdateName;
 
     } catch (error) {
       throw new Error("Error an update the user");
