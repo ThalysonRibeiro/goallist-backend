@@ -11,7 +11,6 @@ import { CreateGoalController } from "../controllres/goal/CreateGoalController";
 import { GetWeekPendingGoalsController } from "../controllres/goal/GetWeekPendingGoalsController";
 import { GoalCompletionController } from "../controllres/goal/GoalCompletionController";
 import { GetWeekSummaryController } from "../controllres/goal/GetWeekSummaryController";
-import { GoalUndoService } from "../services/goalCompletion/GoalUndoService";
 import { GoalUndoController } from "../controllres/GoalCompletion/GoalUndoController";
 import { DeleteGoalController } from "../controllres/goal/DeleteGoalController";
 import { DeleteAllGoalCompletionsController } from "../controllres/GoalCompletion/DeleteAllGoalCompletionsController";
