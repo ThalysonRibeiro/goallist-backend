@@ -14,6 +14,7 @@ import { GetWeekSummaryController } from "../controllres/goal/GetWeekSummaryCont
 import { GoalUndoService } from "../services/goalCompletion/GoalUndoService";
 import { GoalUndoController } from "../controllres/GoalCompletion/GoalUndoController";
 import { DeleteGoalController } from "../controllres/goal/DeleteGoalController";
+import { DeleteAllGoalCompletionsController } from "../controllres/GoalCompletion/DeleteAllGoalCompletionsController";
 
 
 export async function appRoutes(fastify: FastifyInstance) {
@@ -39,12 +40,13 @@ export async function appRoutes(fastify: FastifyInstance) {
   fastify.delete('/delete-user', { preHandler: isAuthenticated }, new DeleteUserController().handle);
 
 
-  //rota criação de meta
+  //rota goal
   fastify.post('/goals', { preHandler: isAuthenticated }, new CreateGoalController().handle);
   fastify.get('/pending-goals', { preHandler: isAuthenticated }, new GetWeekPendingGoalsController().handle);
   fastify.post('/completions', { preHandler: isAuthenticated }, new GoalCompletionController().handle);
   fastify.get('/summary', { preHandler: isAuthenticated }, new GetWeekSummaryController().handle);
   fastify.delete('/delete-goal', { preHandler: isAuthenticated }, new DeleteGoalController().handle);
+  fastify.delete('/delete-all-goal-completion', { preHandler: isAuthenticated }, new DeleteAllGoalCompletionsController().handle);
 
   //rota goalcompletion
   fastify.delete('/undo', { preHandler: isAuthenticated }, new GoalUndoController().handle);
